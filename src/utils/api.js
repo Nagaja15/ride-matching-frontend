@@ -1,8 +1,10 @@
 import axios from 'axios'
 import { getToken } from './auth'
 
+const PROD_URL = 'https://ride-matching-engine-production.up.railway.app/api'
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || '/api'
+  baseURL: import.meta.env.VITE_API_URL || PROD_URL
 })
 
 api.interceptors.request.use(cfg => {

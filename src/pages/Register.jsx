@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../utils/api'
 import toast from 'react-hot-toast'
 
 export default function Register() {
@@ -13,7 +13,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault(); setLoading(true); setError('')
     try {
-      await axios.post('/api/auth/register', form)
+      await api.post('/auth/register', form)
       toast.success('🎉 Account created! Please sign in.')
       setTimeout(() => navigate('/login'), 1500)
     } catch (err) {
@@ -165,7 +165,7 @@ export default function Register() {
                   <label className="fld-lbl">Full Name</label>
                   <div className="fld-wrap">
                     <span className="fld-icon">👤</span>
-                    <input type="text" placeholder="e.g. Rahul Sharma" value={form.name}
+                    <input type="text" placeholder="e.g. Nagaja Goud" value={form.name}
                       onChange={e => setForm({...form, name:e.target.value})}
                       style={inp} required onFocus={focus} onBlur={blur} />
                   </div>

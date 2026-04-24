@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import axios from 'axios'
+import api from '../utils/api'
 import toast from 'react-hot-toast'
 import { saveAuth } from '../utils/auth'
 
@@ -16,7 +16,7 @@ export default function Login() {
   const handleEmailLogin = async (e) => {
     e.preventDefault(); setLoading(true); setError('')
     try {
-      const res = await axios.post('/api/auth/login', form)
+      const res = await api.post('/auth/login', form)
       saveAuth(res.data.token, res.data.role, res.data.email, res.data.id, res.data.name)
       toast.success(`Welcome back${res.data.name ? ', ' + res.data.name : ''}! 👋`)
       setTimeout(() => navigate(res.data.role === 'RIDER' ? '/rider' : '/driver'), 800)
